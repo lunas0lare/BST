@@ -13,7 +13,7 @@ public class BinaryTreeNorm {
         if(root == null){
             return new Node(data);
         }
-        if(data <= root.getData()){
+        if(data <= current.getData()){
             while(current.left != null){
                 current = current.left;
             }

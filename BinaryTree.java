@@ -7,7 +7,7 @@ public class BinaryTree{
     public BinaryTree(){
         this.root = null;
     }
-    
+
     public Node insert(Node root, int data){
         if(root == null){
             return new Node(data);
@@ -28,17 +28,23 @@ public class BinaryTree{
         if(root == null){
             return new Node(data);
         }
-        if(data <= root.getData()){
-            while(current.left != null){
-                current = current.left;
+        while(true){
+            if(data <= current.getData()){
+                if(current.left == null){
+                    current.left = new Node(data);
+                    return root;
+                }
+                 current = current.left;
             }
-            current.left = new Node(data);
-        }
-        else{
-            while(current.right != null){
-                current = current.right;
+            else if(data > current.getData()){
+                if(current.right == null){
+                    current.right = new Node(data);
+                    return root;
+                }current = current.right;
+                
             }
-            current.right = new Node(data);
+            else break;
+
         }
         return root;
     }
@@ -59,35 +65,20 @@ public class BinaryTree{
         }
     }
 
-    public Boolean searchNorm(Node root, int data){
-        if(root == null){
-            return false;
-        }
-
-        if(root.getData() == data){
-            return true;
-        }
-
-        Node current = root;
-
-        while(current != null){
-            if(data < current.getData()){
-                current = current.left;
-            }
-            else if(data > current.getData()){
-                current = current.right;
-            }
-            else if(data == current.getData()){
-                return true;
-            }
-
-        }
-        return false;
+    public Node successor(Node root, int data){
+        
     }
     public static void preOrder(Node root){
         if(root == null) return;
-        System.out.print(root.getData());
+        System.out.println(root.getData());
         preOrder(root.left);
         preOrder(root.right);
+    }
+
+    public static void inOrder(Node root){
+        if(root == null) return;
+        inOrder(root.left);
+        System.out.println(root.getData());
+        inOrder(root.right);
     }
 }
