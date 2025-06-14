@@ -13,21 +13,50 @@ public class BinaryTreeNorm {
         if(root == null){
             return new Node(data);
         }
-        if(data <= current.getData()){
-            while(current.left != null){
-                current = current.left;
+        while(true){
+            if(data <= current.getData()){
+                if(current.left == null){
+                    current.left = new Node(data);
+                    return root;
+                }
+                 current = current.left;
             }
-            current.left = new Node(data);
-        }
-        else{
-            while(current.right != null){
-                current = current.right;
+            else if(data > current.getData()){
+                if(current.right == null){
+                    current.right = new Node(data);
+                    return root;
+                }current = current.right;
+                
             }
-            current.right = new Node(data);
+            else break;
+
         }
         return root;
     }
 
+     public Node successor(Node root, int data){
+        if(root == null) return null;
+
+        Node current = root;
+        Node successor = current;
+        while(current.getData() > data){
+            successor = current;
+            current = current.left;
+            if(current.getData() <= data) return successor;
+        }
+
+        while(current.getData() < data){
+            successor = current;
+            current = current.right;
+        }
+           
+            Node temp = current.right;
+            if(temp == null) return null;
+            while(temp.left != null){
+                temp = temp.left;
+            }
+            return temp;
+    }
     public Boolean searchNorm(Node root, int data){
         if(root == null){
             return false;

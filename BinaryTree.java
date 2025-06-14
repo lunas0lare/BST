@@ -66,7 +66,31 @@ public class BinaryTree{
     }
 
     public Node successor(Node root, int data){
-        
+        if(root == null) return null;
+
+        Node current = root;
+        Node successor = null;
+
+        while (true) { 
+            if(current.getData() > data){
+                successor = current;
+                current = current.left;
+            if(current.getData() == data && successor.getData() > data) return successor;
+            }
+            if(current.getData() < data){
+                current = current.right;//not update successor here because element in right subtree is smaller
+            }
+            if(current.getData() == data) break;
+        }  
+
+            Node temp = current.right;
+            if(temp != null){
+            while(temp.left != null){
+                temp = temp.left;
+            }
+            return temp;
+            }
+            return successor;
     }
     public static void preOrder(Node root){
         if(root == null) return;
